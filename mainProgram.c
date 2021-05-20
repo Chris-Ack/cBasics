@@ -89,6 +89,86 @@ int detectI2C(int addr){
     }
 }
 
+int piMenu(){
+    int piMenuVar;
+    printf("1.: Turn LED on \n");
+    printf("2.: Turn LED off \n");
+    printf("3.: Write LCD Line 1 \n");
+    printf("4.: Write LCD Line 2 \n");
+    printf("5.: Clear Display \n");
+    printf("6.: Write CPU Temperature and Time \n");
+    printf("0. Back to main menu \n");
+    printf("\n");
+    scanf("%d", &piMenuVar);
+
+    if (piMenuVar == 1) {
+        digitalWrite(ledPin, HIGH);
+        printf("LED turned on \n");
+        piMenu();
+        }
+    else if (piMenuVar == 2) {
+        digitalWrite(ledPin, LOW);
+        printf("LED turned off \n");
+        piMenu();
+    }
+    else if (piMenuVar == 3) {
+        getchar();
+        char lineOne[16];
+        printf("Please enter up to 16 letters: \n");
+        fgets(lineOne, 16, stdin);
+        lineOne[strlen(lineOne)-1]='\0';
+        lcdPosition(lcdhd,0,0);
+        lcdPrintf(lcdhd,"%s",lineOne);
+        printf("Line One was set to: %s.", lineOne);
+        piMenu();
+    }
+    else if (piMenuVar == 4) {
+        getchar();
+        char lineTwo[16];
+        printf("Please enter up to 16 letters: \n");
+        fgets(lineTwo, 16, stdin);
+        lineTwo[strlen(lineTwo)-1]='\0';
+        lcdPosition(lcdhd,0,1);
+        lcdPrintf(lcdhd,"%s",lineTwo);
+        printf("Line Two was set to: %s.", lineTwo);
+        piMenu();
+    }
+    else if (piMenuVar == 5) {
+        lcdPosition(lcdhd,0,0);
+        lcdPrintf(lcdhd,"                ");
+        lcdPosition(lcdhd,0,1);
+        lcdPrintf(lcdhd,"                ");
+        printf("Display cleared \n");
+        piMenu();
+    }
+    else if (piMenuVar == 6) {
+        printCPUTemperature();
+        printDataTime();
+        printf("CPU Temp and Time written to LCD.");
+        piMenu();
+    }
+    if (piMenuVar == 0) {
+        mainMenu();
+    }
+}
+
+int hexMenu(){
+    int hexMenuVar;
+    printf("Please select from the following. \n");
+    printf("1. Number overview for the demo \n");
+    printf("2. Enter own char \n");
+    printf("3. Enter own string \n");
+    printf("0. Back to main menu \n");
+    printf("\n");
+    scanf("%d", &hexMenuVar);
+
+    if (number == 0) {
+        mainMenu();
+    }
+}
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 int mainMenu() {
@@ -98,61 +178,18 @@ int mainMenu() {
     int number;
     printf("Please enter the number for the command you want to execute. \n");
     printf("\n");
-    printf("1.: Turn LED on \n");
-    printf("2.: Turn LED off \n");
-    printf("3.: Write LCD Line 1 \n");
-    printf("4.: Write LCD Line 2 \n");
-    printf("5.: Clear Display \n");
-    printf("6.: Write CPU Temperature and Time \n");
+    printf("1.: GPIO control \n");
+    printf("2.: Memory Demo");
     printf("0.: Exit Program \n");
     printf("\n");
     scanf("%d", &number);
 
     if (number == 1) {
-        digitalWrite(ledPin, HIGH);
-        printf("LED turned on \n");
-        mainMenu();
+        piMenu();
         }
     else if (number == 2) {
-        digitalWrite(ledPin, LOW);
-        printf("LED turned off \n");
-        mainMenu();
+        hexMenu();
     }
-    else if (number == 3) {
-        getchar();
-        char lineOne[16];
-        printf("Please enter up to 16 letters: \n");
-        fgets(lineOne, 16, stdin);
-        lineOne[strlen(lineOne)-1]='\0';
-        lcdPosition(lcdhd,0,0);
-        lcdPrintf(lcdhd,"%s",lineOne);
-        printf("Line One was set to: %s.", lineOne);
-        mainMenu();
-    }
-    else if (number == 4) {
-        getchar();
-        char lineTwo[16];
-        printf("Please enter up to 16 letters: \n");
-        fgets(lineTwo, 16, stdin);
-        lineTwo[strlen(lineTwo)-1]='\0';
-        lcdPosition(lcdhd,0,1);
-        lcdPrintf(lcdhd,"%s",lineTwo);
-        printf("Line Two was set to: %s.", lineTwo);
-        mainMenu();
-    }
-    else if (number == 5) {
-        lcdPosition(lcdhd,0,0);
-        lcdPrintf(lcdhd,"                ");
-        lcdPosition(lcdhd,0,1);
-        lcdPrintf(lcdhd,"                ");
-        printf("Display cleared \n");
-        mainMenu();
-    }
-    else if (number == 6) {
-        printCPUTemperature();
-        printDataTime();
-        printf("CPU Temp and Time written to LCD.");
-        mainMenu();
     }
     else if (number == 0) {
         return 0;
