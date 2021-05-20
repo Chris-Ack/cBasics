@@ -55,7 +55,7 @@ void hexDump (char *desc, void *addr, int len) {
 }
 
 int main (int argc, char *argv[]) {
-    double d1 = 1;
+    double d1 = 4294967295;
     char s1[] = "Test";
     char s2[] = "This is a slightly longer string";
     hexDump ("d1", &d1, sizeof d1);

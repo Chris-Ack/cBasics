@@ -11,6 +11,7 @@
 #include <pcf8574.h>
 #include <lcd.h>
 #include <time.h>
+#include <inttypes.h>
 
 // the same could be achieved without a header file by initializing printf directly // int printf(const char *text, ...);
 
@@ -88,6 +89,51 @@ int detectI2C(int addr){
         }
     }
 }
+//////////////////////////////////////MEMORY FUNCTIONS/////////////////////////////////////////////
+void print_bytes(void *ptr, int size) 
+{
+    unsigned char *p = ptr;
+    int i;
+    for (i=0; i<size; i++) {
+        printf("%02hhX ", p[i]);
+    }
+    printf("\n");
+}
+void printbits(char x)
+{
+    for(int i=sizeof(x)<<3; i; i--)
+        putchar('0'+((x>>(i-1))&1));
+}
+
+
+///////////////////////////////////////MENUS/////////////////////////////////////////////////
+int mainMenu();
+int piMenu();
+int hexMenu();
+
+int mainMenu() {
+    printf("\nHallo Welt!\n");
+    printf("We're gonna scribe the shit out of this week.\n");
+    printf("\n");
+    int number;
+    printf("Please enter the number for the command you want to execute. \n");
+    printf("\n");
+    printf("1.: GPIO control \n");
+    printf("2.: Memory Demo \n");
+    printf("0.: Exit Program \n");
+    printf("\n");
+    scanf("%d", &number);
+
+    if (number == 1) {
+        piMenu();
+    }
+    else if (number == 2) {
+        hexMenu();
+    }
+    else if (number == 0) {
+        return 0;
+    }
+}
 
 int piMenu(){
     int piMenuVar;
@@ -154,48 +200,115 @@ int piMenu(){
 
 int hexMenu(){
     int hexMenuVar;
+    printf("\n");
     printf("Please select from the following. \n");
-    printf("1. Number overview for the demo \n");
-    printf("2. Enter own char \n");
-    printf("3. Enter own string \n");
+    printf("1. Binary overview for the Demo \n");
+    printf("2. Hex overview for the Demo \n");
+    printf("3. Enter own char \n");
+    printf("4. Enter own string \n");
+    printf("5. Find content by address \n");
     printf("0. Back to main menu \n");
     printf("\n");
     scanf("%d", &hexMenuVar);
 
-    if (number == 0) {
+    if (hexMenuVar == 0) {
         mainMenu();
+    }
+    else if (hexMenuVar == 1) {
+        char v = 0;
+        char w = 1;
+        char x = 255;
+
+        printf("Hex value for 0: ");
+        printbits(v);
+        printf("\n");
+        printf("Hex value for 1: ");
+        printbits(w);
+        printf("\n");
+        printf("Hex value for 255: ");
+        printbits(x);
+        printf("\n");
+        hexMenu();
+    }
+    
+    
+    else if (hexMenuVar == 2) {
+        char v = 0;
+        char w = 1;
+        char x = 255;
+        int y = 256;
+        int z = (4294967295);
+
+        printf("Hex value for 0: ");
+        print_bytes(&v, sizeof(v));
+        printf("\n");
+        printf("Hex value for 1: ");
+        print_bytes(&w, sizeof(w));
+        printf("\n");
+        printf("Hex value for 255: ");
+        print_bytes(&x, sizeof(x));
+        printf("\n");
+        printf("Hex value for 256: ");
+        print_bytes(&y, sizeof(y));  
+        printf("\n");
+        printf("Biggest value stored in 4 Byte: ");
+        print_bytes(&z, sizeof(z));  
+        printf("\n");
+        hexMenu();
+    }
+    else if (hexMenuVar == 3) {
+        char charToDisplay;
+        printf("\n");
+        printf("Please enter char \n");
+        printf("\n");
+        scanf("%d", &charToDisplay);
+        printf("\n");
+        printf("Char %d in Hex: \n", charToDisplay);
+        print_bytes(&charToDisplay, sizeof(charToDisplay));
+        printf("\n");
+        printf("Char %d in Binary: \n", charToDisplay);
+        printbits(charToDisplay);
+        printf("\n");
+        hexMenu(); 
+    }
+    else if (hexMenuVar == 4) {
+        char example[8];
+        printf("\n");
+        printf("Please enter a string with no more than 7 letters \n");
+        printf("\n");
+        scanf("%16s", &example);
+        printf("\n");
+        printf("Address of 1st Variable char: %x\n", &example[0]);
+        printf("Address of 2nd Variable char: %x\n", &example[1]);
+        printf("Address of 3rd Variable char: %x\n", &example[2]);
+        printf("Address of 4th Variable char: %x\n", &example[3]);
+        printf("Address of 5th Variable char: %x\n", &example[4]);
+        printf("Address of 6th Variable char: %x\n", &example[5]);
+        printf("Address of 7th Variable char: %x\n", &example[6]);
+        printf("Address of 8th Variable char: %x\n", &example[7]);
+        printf("\n");
+        printf("The data read = %s \n", &example[1]);
+
+        hexMenu();
+    }
+    else if (hexMenuVar == 5) {
+        
+        char *address;
+        char value = 0;
+
+        printf("Please enter <address> \n");
+        scanf("%s", *address);
+        value = *address;
+        printf("The data read = %s \n", &value);
+
+        printf("\n");
+        hexMenu();
     }
 }
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-
-int mainMenu() {
-    printf("\nHallo Welt!\n");
-    printf("We're gonna scribe the shit out of this week.\n");
-    printf("\n");
-    int number;
-    printf("Please enter the number for the command you want to execute. \n");
-    printf("\n");
-    printf("1.: GPIO control \n");
-    printf("2.: Memory Demo");
-    printf("0.: Exit Program \n");
-    printf("\n");
-    scanf("%d", &number);
-
-    if (number == 1) {
-        piMenu();
-        }
-    else if (number == 2) {
-        hexMenu();
-    }
-    }
-    else if (number == 0) {
-        return 0;
-    }
-}
-
 
 int main()
 {
