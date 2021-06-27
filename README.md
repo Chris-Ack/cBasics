@@ -21,7 +21,7 @@
 
 <!-- ABOUT -->
 
-# About The Project
+## About The Project
 
 This project was created as part of the "Polyglottal Week" of the Code Chrysalis Advanced Software Engineering Program.
 
@@ -40,7 +40,7 @@ Additionally, this helped me understand the "quality of life" improvements that 
 
 <!-- STRUCTURE -->
 
-# Structure of the Repository
+## Structure of the Repository
 
 The repo is structured as follows:
 
