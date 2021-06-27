@@ -44,30 +44,39 @@ Additionally, this helped me understand the "quality of life" improvements that 
 
 The repo is structured as follows:
 
-1. CompilerBreakdown: 
+1. CompilerBreakdown:
+
 Contains Examples of mainProgram.c as it is going through the main steps of the compiling process.
+
 - Preprocess
 - Compiler
 - Assembly
 - Linker
+
 These steps were shown in a short presentation to give an overview of how a compiler works.
 
 2. earlyExplorations:
+
 Contains the following exploratory scripts:
+
 - HelloPi: The simplest Hello World example, as you might expect
 - HexDump: An attempt to print out the content of stored memory to the console.
 - PrintByte: Print out a byte to the console
 - testName: A very simple additon script
 
 3. MainProgram:
+
 The main code of this repo, incorporating the above scripts to achieve the following overall functionality:
+
 - RaspberryPi controls:
   - Controlling an LED on the RaspberryPI GPIO Breadboard
   - Controlling an LCD screen on the RaspberryPI GPIO Breadboard
   - Displaying the core temperature of the RaspberryPI
+
 - Exploration of Memory handling:
   - Displaying different values in bytes and bits
   - Printing out the content of stored memory
+
 
 
 <!-- CONTACT -->
