@@ -9,6 +9,6 @@
 int main()
 {
     printf("Hallo Welt!\n");
-    printf("We're gonna scribe the shit out of this week.\n");
+    printf("We're gonna scribe the **** out of this week.\n");
     return 0;
 }
