@@ -1,7 +1,7 @@
 <br />
 <p align="center">
-  <p align="center">
-    Exploring the basics of C
+  <p align="center" font-size: large>
+    <b>Exploring the basics of C </b>
     <br />
     <br />
     <br />
@@ -14,7 +14,7 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#structure">Structure of the Repository</a></li>
+    <li><a href="#structure-of-the-repository">Structure of the Repository</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
