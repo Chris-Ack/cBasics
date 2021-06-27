@@ -14,7 +14,7 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#structure">Structure of the Repo</a></li>
+    <li><a href="#structure">Structure of the Repository</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -39,6 +39,8 @@ These are:
 Additionally, this helped me understand the "quality of life" improvements that modern programming languages include.
 
 <!-- STRUCTURE -->
+
+# Structure of the Repository
 
 The repo is structured as follows:
 
